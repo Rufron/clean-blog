@@ -50,14 +50,16 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <p><?php echo $post->body; ?></p>
                         
-                         <a href="update.php?upd_id=<?php echo $post->id; ?>" class="btn btn-primary a-btn-slide-text">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            <span><strong>Update</strong></span>            
-                        </a>
-                        <a href="http://localhost/clean-blog/posts/delete.php?del_id=<?php echo $post->id; ?>" class="btn btn-danger a-btn-slide-text float-end">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            <span><strong>Delete</strong></span>            
-                        </a>
+                        <?php if(isset($_SESSION['user_id']) AND $_SESSION['user_id'] == $post->user_id) : ?>
+                            <a href="update.php?upd_id=<?php echo $post->id; ?>" class="btn btn-primary a-btn-slide-text">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                <span><strong>Update</strong></span>            
+                            </a>
+                            <a href="http://localhost/clean-blog/posts/delete.php?del_id=<?php echo $post->id; ?>" class="btn btn-danger a-btn-slide-text float-end">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                <span><strong>Delete</strong></span>            
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

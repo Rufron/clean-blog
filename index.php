@@ -10,6 +10,10 @@ require 'includes/header.php';
     $posts->execute();
     $rows = $posts->fetchAll(PDO::FETCH_OBJ);
 
+    $categories = $conn->query("SELECT * FROM categories");
+    $categories->execute();
+    $categories = $categories->fetchAll(PDO::FETCH_OBJ);
+
 ?>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
@@ -45,5 +49,19 @@ require 'includes/header.php';
                 </div>
             </div>
         </div>
+        
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+
+            <?php foreach ($categories as $cat) : ?>
+                        <div class="col-md-6">
+                            <a href="http://localhost/clean-blog/categories/category.php?cat_id=<?php echo $cat->id; ?>">
+                                <div class="alert alert-dark bg-dark text-white text-center" role="alert">
+                                    <?php echo $cat->name ; ?>
+                                </div>
+                            </a>
+                        </div>
+            <?php endforeach; ?>
+        </div>
+        
 <?php require 'includes/footer.php'; ?>
   

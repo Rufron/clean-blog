@@ -29,11 +29,10 @@ if(isset($_GET['del_id'])) {
     }
 
     include '../includes/navbar.php';
-
-
-   
     
-}
+} else {
+        header('location: http://localhost/clean-blog/404.php');
+    }
 
 
 ?>

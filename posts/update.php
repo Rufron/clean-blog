@@ -45,7 +45,9 @@ if ((int)$_SESSION['user_id'] !== (int)$rows->user_id) {
 
 if(isset($_POST['submit'])) {
     if($_POST['title'] == '' OR $_POST['subtitle'] == '' OR $_POST['body'] == ''){
-        echo 'One or more inputs is missing.';
+        echo '<div class="alert alert-danger  text-white text-center" role="alert">
+                One or more inputs is empty
+              </div>';
     } else {
         // Deleting old image
         if ($rows && file_exists('../images/' . $rows->img)) {
@@ -80,7 +82,9 @@ if(isset($_POST['submit'])) {
             echo 'Database update failed.';
         }
     }
-}
+} else {
+        header('location: http://localhost/clean-blog/404.php');
+    }
 
 
 ?>

@@ -13,7 +13,9 @@ if(isset($_SESSION['username'])) {
 if(isset($_POST['submit'])) {
 
     if($_POST['email'] == '' OR $_POST['username'] == '' OR $_POST['password'] == ''){
-        echo 'Type something in the inputs';
+        echo '<div class="alert alert-danger  text-white text-center" role="alert">
+                  Enter data into the inputs.
+              </div> ';
     }
     else {
         $email = $_POST['email'];

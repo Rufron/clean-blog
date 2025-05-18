@@ -14,7 +14,7 @@
 
         $post= $select->fetch(PDO::FETCH_OBJ);
     }   else {
-        echo '404';
+        header('location: http://localhost/clean-blog/404.php');
     }
 
 ?>

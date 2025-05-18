@@ -14,6 +14,8 @@ require '../includes/header.php'; ?>
         WHERE posts.category_id='$id'");
         $posts->execute();
         $rows = $posts->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        header('location: http://localhost/clean-blog/404.php');
     }
     
 

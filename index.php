@@ -4,6 +4,7 @@ require 'includes/header.php';
 ?>
 <?php require 'config/config.php'; ?>
 
+
 <?php 
 
     $posts = $conn->query("SELECT * FROM posts");
@@ -51,6 +52,10 @@ require 'includes/header.php';
         </div>
         
         <div class="row gx-4 gx-lg-5 justify-content-center">
+            <h3 class="text-center">Categories</h3>
+            <br>
+            <br>
+            <br>
 
             <?php foreach ($categories as $cat) : ?>
                         <div class="col-md-6">

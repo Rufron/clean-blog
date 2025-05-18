@@ -6,15 +6,21 @@ require '../includes/header.php'; ?>
 
 <?php
 
+    $categories = $conn->query("SELECT * FROM categories");
+    $categories->execute();
+    $categories = $categories->fetchAll(PDO::FETCH_OBJ);
+
+
     if(isset($_POST['submit'])) {
 
-    if($_POST['title'] == '' OR $_POST['subtitle'] == '' OR $_POST['body'] == ''){
+    if($_POST['title'] == '' OR $_POST['subtitle'] == '' OR $_POST['body'] == '' OR $_POST['category_id'] == ''){
         echo 'One or more inputs is missing.';
     }
     else{
         $title = $_POST['title'];
         $subtitle = $_POST['subtitle'];
         $body = $_POST['body'];
+        $category_id = $_POST['category_id'];
         $img = $_FILES['img']['name'];
         $user_id = $_SESSION['user_id'];
         $user_name = $_SESSION['username'];
@@ -22,12 +28,13 @@ require '../includes/header.php'; ?>
 
         $dir = '../images/' . basename($img);
 
-        $insert = $conn->prepare("INSERT INTO posts (title, subtitle, body, img, user_id, user_name) VALUES (:title, :subtitle, :body, :img, :user_id, :user_name)");
+        $insert = $conn->prepare("INSERT INTO posts (title, subtitle, body, category_id, img, user_id, user_name) VALUES (:title, :subtitle, :body, :category_id, :img, :user_id, :user_name)");
 
         $insert->execute([
             ':title' => $title,
             ':subtitle' => $subtitle,
             ':body' => $body,
+            ':category_id' => $category_id,
             ':img' => $img,
             ':user_id' => $user_id,
             ':user_name' => $user_name,
@@ -60,6 +67,14 @@ require '../includes/header.php'; ?>
                 <textarea type="text" name="body" id="form2Example1" class="form-control" placeholder="body" rows="8"></textarea>
             </div>
 
+            <div class="form-outline mb-4">
+              <select class="form-select" name="category_id" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                  <?php foreach($categories as $cat) : ?>
+                    <option value="<?php echo $cat->id ; ?>"><?php echo $cat->name ; ?></option>
+                  <?php endforeach ; ?>
+              </select>
+            </div>
               
              <div class="form-outline mb-4">
                 <input type="file" name="img" id="form2Example1" class="form-control" placeholder="image" />

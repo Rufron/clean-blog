@@ -1,8 +1,5 @@
 <?php
-// if (session_status() === PHP_SESSION_NONE) {
-//     session_start();
-  
-// }
+
 session_start();
 
 ?>
@@ -46,7 +43,7 @@ session_start();
                                 <?php echo $_SESSION['username']; ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/clean-blog/users/profile.php?prof_id=<?php echo $_SESSION['user_id']; ?>">Profile</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/clean-blog/auth/logout.php">Log Out</a></li>
                             </ul>
                         </div>

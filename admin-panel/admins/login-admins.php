@@ -3,6 +3,12 @@
 
 <?php 
 
+if(isset($_SESSION['adminname'])) {
+
+  header('location: http://localhost/clean-blog/admin-panel/index.php');
+
+}
+
 if (isset($_POST['submit'])) {
     if($_POST['email'] == '' OR $_POST['password'] == ''){
         echo "One or more inputs are empty";

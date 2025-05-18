@@ -44,7 +44,6 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="posts-admins/show-posts.php" style="margin-left: 20px;">Posts</a>
                         </li>
-            <?php endif ; ?>
                         <!--  <li class="nav-item">
             <a class="nav-link" href="#" style="margin-left: 20px;">Comments</a>
           </li> -->
@@ -55,23 +54,27 @@ session_start();
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admins/login-admins.php">login
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
+                       
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                username
+                                              <?php echo $_SESSION['adminname']; ?>
+
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="http://localhost/clean-blog/admin-panel/admins/logout.php">Logout</a>
 
                         </li>
+                    <?php else : ?>
+                         <li class="nav-item">
+                            <a class="nav-link" href="http://localhost/clean-blog/admin-panel/admins/login-admins.php">login
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    <?php endif ; ?>
 
 
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container-fluid">
+        <div class="container">

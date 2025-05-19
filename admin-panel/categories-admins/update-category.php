@@ -1,75 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Admin Panel</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-     <link href="../styles/style.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div id="wrapper">
-    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
-      <div class="container">
-      <a class="navbar-brand" href="#">LOGO</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<?php require "../layouts/header.php"; ?>
+<?php require "../../config/config.php"; ?>
 
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav side-nav" >
-          <li class="nav-item">
-            <a class="nav-link" style="margin-left: 20px;" href="../index.html">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admins.html" style="margin-left: 20px;">Admins</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../categories-admins/show-categories.html" style="margin-left: 20px;">Categories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../posts-admins/show-posts.html" style="margin-left: 20px;">Posts</a>
-          </li>
-         <!--  <li class="nav-item">
-            <a class="nav-link" href="#" style="margin-left: 20px;">Comments</a>
-          </li> -->
-        </ul>
-        <ul class="navbar-nav ml-md-auto d-md-flex">
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              username
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Logout</a>
-              
-          </li>
-                          
-          
-        </ul>
-      </div>
-    </div>
-    </nav>
-    <div class="container-fluid">
+
+<?php
+
+// Check if 'upd_id' is set
+if (!isset($_GET['up_id'])) {
+    die("No up_id in GET request.");
+}
+
+$id = $_GET['up_id'];
+
+// Prepare and execute the SELECT statement safely
+$select = $conn->prepare("SELECT * FROM categories WHERE id = :id");
+$select->execute([':id' => $id]);
+$rows = $select->fetch(PDO::FETCH_OBJ);
+
+if (!$rows) {
+    die("No post found with this ID.");
+}
+
+if(isset($_POST['submit'])) {
+    if($_POST['name'] == ''){
+        echo '<div class="alert alert-danger  text-white text-center" role="alert">
+                One or more inputs is empty
+              </div>';
+    } else {
+       
+        $name = $_POST['name'];
+        
+
+        $update = $conn->prepare("UPDATE categories SET name = :name WHERE id = :id");
+        $result = $update->execute([
+            ':name' => $name,
+            ':id' => $id
+        ]);
+
+    header('location: http://localhost/clean-blog/admin-panel/categories-admins/show-categories.php');
+       
+    }
+
+   
+        if ($result) {
+            header('Location: http://localhost/clean-blog/admin-panel/categories-admins/show-categories.php');
+            exit;
+        } else {
+            echo '<div class="alert alert-danger text-white text-center" role="alert">
+                    Update failed. Please try again.
+                  </div>';
+        }
+} 
+// else {
+//         header('location: http://localhost/clean-blog/404.php');
+//     }
+
+
+
+?>
+
        <div class="row">
         <div class="col">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-5 d-inline">Update Categories</h5>
-          <form method="POST" action="" enctype="multipart/form-data">
+          <form method="POST" action="http://localhost/clean-blog/admin-panel/categories-admins/update-category.php?up_id=<?php echo $rows->id; ?>" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="name" id="form2Example1" class="form-control" placeholder="name" />
+                  <input type="text" name="name" value="<?php echo $rows->name; ?>" id="form2Example1" class="form-control" placeholder="name" />
                  
                 </div>
 
@@ -84,9 +81,4 @@
           </div>
         </div>
       </div>
-  </div>
-<script type="text/javascript">
-
-</script>
-</body>
-</html>
+<?php require "../layouts/footer.php"; ?>

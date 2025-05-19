@@ -7,7 +7,7 @@ require 'includes/header.php';
 
 <?php 
 
-    $posts = $conn->query("SELECT * FROM posts");
+    $posts = $conn->query("SELECT * FROM posts WHERE status = 1 ORDER BY created_at DESC");
     $posts->execute();
     $rows = $posts->fetchAll(PDO::FETCH_OBJ);
 

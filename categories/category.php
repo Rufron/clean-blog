@@ -9,9 +9,9 @@ require '../includes/header.php'; ?>
     if(isset($_GET['cat_id'])) {
         $id = $_GET['cat_id'];
 
-        $posts = $conn->query("SELECT posts.id AS id, posts.title AS title, posts.subtitle AS subtitle, posts.user_name AS user_name, posts.created_at AS created_at, posts.category_id AS category_id FROM categories JOIN posts ON categories.id = posts.category_id
+        $posts = $conn->query("SELECT posts.id AS id, posts.title AS title, posts.subtitle AS subtitle, posts.user_name AS user_name, posts.created_at AS created_at, posts.category_id AS category_id, posts.status AS status FROM categories JOIN posts ON categories.id = posts.category_id
 
-        WHERE posts.category_id='$id'");
+        WHERE posts.category_id='$id' AND status = 1 ORDER BY posts.created_at DESC");
         $posts->execute();
         $rows = $posts->fetchAll(PDO::FETCH_OBJ);
     } else {

@@ -4,6 +4,18 @@
 
 <?php
 
+    if(!isset($_SESSION['adminname'])) {
+
+          header('location: http://localhost/clean-blog/admin-panel/admins/login-admins.php');
+
+        }
+        
+        
+    // Check if 'up_id' is set in the URL
+    if (!isset($_GET['up_id'])) {
+        die("No up_id in GET request.");
+    }
+
 // Check if 'upd_id' is set
 if (!isset($_GET['up_id'])) {
     die("No up_id in GET request.");

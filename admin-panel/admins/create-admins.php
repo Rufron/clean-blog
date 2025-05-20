@@ -4,9 +4,12 @@
 <?php
 
 
-      // if(isset($_SESSION['username'])) {
-      //     header("location: ../index.php");
-      // }
+          if(!isset($_SESSION['adminname'])) {
+
+          header('location: http://localhost/clean-blog/admin-panel/admins/login-admins.php');
+
+        }
+
 
       if(isset($_POST['submit'])) {
 

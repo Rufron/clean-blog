@@ -3,6 +3,12 @@
 
 
 <?php
+    if(!isset($_SESSION['adminname'])) {
+
+          header('location: http://localhost/clean-blog/admin-panel/admins/login-admins.php');
+
+        }
+
 
 if(isset($_GET['de_id'])) {
     $id = $_GET['de_id'];

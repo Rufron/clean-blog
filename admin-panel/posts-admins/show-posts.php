@@ -4,6 +4,14 @@
 <?php
 
 
+        if(!isset($_SESSION['adminname'])) {
+
+          header('location: http://localhost/clean-blog/admin-panel/admins/login-admins.php');
+
+        }
+
+
+
         $posts = $conn->query("SELECT posts.id AS id, posts.title AS title,  posts.user_name AS user_name, posts.status AS status,
         categories.name AS name FROM categories JOIN posts ON categories.id = posts.category_id");
         $posts->execute();

@@ -3,6 +3,14 @@
 
 <?php
 
+
+    if(!isset($_SESSION['adminname'])) {
+
+          header('location: http://localhost/clean-blog/admin-panel/admins/login-admins.php');
+
+        }
+
+
     // $admins = $conn->query("SELECT * FROM  admins");
     // $admins->execute();
     // $rows = $admins->fetch(PDO::FETCH_OBJ);

@@ -44,9 +44,9 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="http://localhost/clean-blog/admin-panel/posts-admins/show-posts.php" style="margin-left: 20px;">Posts</a>
                         </li>
-                        <!--  <li class="nav-item">
-            <a class="nav-link" href="#" style="margin-left: 20px;">Comments</a>
-          </li> -->
+                         <li class="nav-item">
+                            <a class="nav-link" href="http://localhost/clean-blog/admin-panel/comments-admins/show-comments.php" style="margin-left: 20px;">Comments</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ml-md-auto d-md-flex">
                         <li class="nav-item">
